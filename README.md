@@ -412,7 +412,19 @@ $ curl -X POST "$NEON_DATA_API_URL/contacts" \
 - Verify for yourself against the full history:
 
   ```bash
-  git log -p --all | grep -Ei 'npg_|neondb_owner:|postgresql://' || echo "no secrets found"
+  git log -p --all | grep -E 'npg_[A-Za-z0-9]{10,}|//[a-z_]+:[A-Za-z0-9]{8,}@' \
+    && echo ">>> SECRET FOUND" || echo ">>> no secrets found - clean"
+  ```
+
+  This matches the *shape* of a real Neon credential — a `npg_…` password, or a
+  `//user:password@` pair — rather than the words "postgres" or "neon". A looser grep is
+  worse than useless here: it matches this very command and the `USER:PASSWORD` placeholder in
+  `.env.example`, then reports a scary false positive on a clean repository. Confirm the
+  detector is actually working by planting a fake secret and re-running:
+
+  ```bash
+  echo 'postgresql://neondb_owner:npg_examplePassword@ep-x.neon.tech/neondb' \
+    | grep -E 'npg_[A-Za-z0-9]{10,}|//[a-z_]+:[A-Za-z0-9]{8,}@'   # matches, as it should
   ```
 
 ---
