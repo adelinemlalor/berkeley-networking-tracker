@@ -120,6 +120,12 @@ grant select, insert, delete on public.contacts to authenticated;
 -- assignment requires and is sufficient on its own, but withholding UPDATE on id, user_id,
 -- and the timestamps means an attempt to rewrite ownership is refused by the privilege
 -- system before RLS is even consulted.
+--
+-- The REVOKE is essential and easy to miss. Enabling the Neon Data API with default grants
+-- gives `authenticated` a TABLE-WIDE update privilege, and a table-level grant subsumes any
+-- column-level one -- so granting columns without first revoking the table grant silently
+-- restricts nothing. Revoke first, then grant only the columns a user may edit.
+revoke update on public.contacts from authenticated;
 grant update (name, company, role, met_at, notes, priority)
   on public.contacts to authenticated;
 

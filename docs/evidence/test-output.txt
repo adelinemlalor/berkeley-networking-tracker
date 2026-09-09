@@ -1,0 +1,53 @@
+ RUN  v4.1.11 /Users/adelinelalor/Documents/Secure Networking Tracker/berkeley-networking-tracker
+
+ ✓ tests/filter-sort.test.ts > applyFilters — priority > returns everything when the filter is "all" 1ms
+ ✓ tests/filter-sort.test.ts > applyFilters — priority > narrows to only high priority 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — priority > narrows to only medium priority 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — priority > narrows to only low priority 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > matches on name, case-insensitively 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > matches on company and can return several people 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > matches on where they met and on notes 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > ignores surrounding whitespace in the search term 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > returns an empty list when nothing matches 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — search > does not fall over on contacts whose optional fields are null 0ms
+ ✓ tests/filter-sort.test.ts > applyFilters — combined > applies search and priority together 0ms
+ ✓ tests/filter-sort.test.ts > applySort > sorts by name ascending and descending 6ms
+ ✓ tests/filter-sort.test.ts > applySort > sorts by date added, newest and oldest first 0ms
+ ✓ tests/filter-sort.test.ts > applySort > sorts by priority using high > medium > low, not alphabetically 0ms
+ ✓ tests/filter-sort.test.ts > applySort > breaks priority ties by name so the order is stable 0ms
+ ✓ tests/filter-sort.test.ts > applySort > never mutates the array it is given 0ms
+ ✓ tests/filter-sort.test.ts > hasActiveFilters > is false for the default filters 0ms
+ ✓ tests/filter-sort.test.ts > hasActiveFilters > is false when the search box holds only whitespace 0ms
+ ✓ tests/filter-sort.test.ts > hasActiveFilters > is true once a search term or priority is set 0ms
+ ✓ tests/filter-sort.test.ts > filterAndSort > filters first, then sorts what is left 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > accepts a fully populated contact 1ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > rejects an empty name 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > rejects a whitespace-only name, matching the DB btrim check 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > rejects a missing name 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > rejects a name longer than 120 characters 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > accepts a name of exactly 120 characters 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — name > trims surrounding whitespace rather than storing it 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > accepts the valid priority high 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > accepts the valid priority medium 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > accepts the valid priority low 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority 'urgent' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority 'HIGH' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority 'critical' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority '' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority 'none' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects the invalid priority '1' 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > rejects a missing priority 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — priority > allows exactly three priorities and no more 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — optional fields > accepts a contact with only a name and priority 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — optional fields > normalises blank optional fields to null so the DB stores NULL, not "" 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — optional fields > rejects notes longer than 2000 characters 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — error reporting > reports every invalid field at once, not just the first 0ms
+ ✓ tests/contact-schema.test.ts > validateContact — error reporting > rejects junk input without throwing 1ms
+ ✓ tests/contact-schema.test.ts > emptyContact > does not validate on its own, so a blank form cannot be submitted 0ms
+ ✓ tests/contact-schema.test.ts > emptyContact > defaults priority to a value the database accepts 0ms
+
+ Test Files  2 passed (2)
+      Tests  45 passed (45)
+   Start at  22:16:04
+   Duration  114ms (transform 39ms, setup 0ms, import 67ms, tests 16ms, environment 0ms)
+

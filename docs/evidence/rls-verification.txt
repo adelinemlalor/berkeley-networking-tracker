@@ -1,0 +1,17 @@
+User A  grader-a@berkeley-tracker.test  id=e136b101-a1e3-4385-b35e-984a43a41210
+User B  grader-b@berkeley-tracker.test  id=1abacca4-dfe2-42d2-8b3b-004ac5f6f9f7
+
+RLS / trusted-validation checks
+---------------------------------------------------------------------------------
+PASS  user_id defaults to the JWT identity, not client input                   row.user_id=e136b101-a1e3-4385-b35e-984a43a41210
+PASS  A's contact list contains none of B's rows                               6 rows returned, 0 foreign
+PASS  A cannot read B's row even by exact id                                   returned 0 rows
+PASS  A cannot update B's row (0 rows affected)                                affected 0 rows
+PASS  A cannot delete B's row (0 rows affected)                                affected 0 rows
+PASS  A cannot insert a row owned by B (insert WITH CHECK)                     HTTP 403 42501
+PASS  A cannot change its row's owner to B (update WITH CHECK + column grant)  HTTP 403 42501
+PASS  priority 'urgent' rejected by the database, not the UI                   HTTP 400 new row for relation "contacts" violates check constraint "contacts_priority_valid"
+PASS  blank name rejected by the database, not the UI                          HTTP 400 new row for relation "contacts" violates check constraint "contacts_name_not_blank"
+PASS  B's row is untouched after all of A's attempts                           name=B private contact
+---------------------------------------------------------------------------------
+10/10 checks passed
